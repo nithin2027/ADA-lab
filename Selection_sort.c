@@ -14,7 +14,6 @@ void sort(int x){
     double start,end;
     start = clock();
     for(i=0;i<n-1;i++){
-        //delay();
         max=a[i];
         for(j=i+1;j<n;j++){
             if(max<a[j]){
