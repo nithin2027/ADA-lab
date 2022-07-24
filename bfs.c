@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <conio.h>
 int a[10][10], n;
 void bfs(int);
 int main()
