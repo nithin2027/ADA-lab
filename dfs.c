@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<conio.h>
 int a[20][20],visited[20],n;
 void dfs(int v)
 {
