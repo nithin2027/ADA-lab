@@ -4,7 +4,7 @@ void DFS(int,int);
 int g[10][10],visited[10],deadend[10],d=-1,n;
 int sortedOrder[10],o,count=0;
 
-int main()
+void main()
 {
     printf("\n Enter the Number of Vertices : ");
     scanf("%d",&n);
@@ -22,13 +22,6 @@ int main()
     {
       DFS(i,0);
     }
-
-    printf("\n\n Topology Order: ");
-    for(int i=0;i<n;i++)
-    {
-        printf(" %d ",sortedOrder[i]);
-    }
-    return 0;
 }
 
 void DFS(int k,int flag)
