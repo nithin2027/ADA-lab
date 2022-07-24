@@ -1,40 +1,62 @@
 #include<stdio.h>
+
+void DFS(int,int);
+int g[10][10],visited[10],deadend[10],d=-1,n;
+int sortedOrder[10],o,count=0;
+
 int main()
 {
-    int i,j,k,n,a[10][10],indeg[10],flag[10],count=0;
-    printf("Enter the no of vertices:\n");
+    printf("\n Enter the Number of Vertices : ");
     scanf("%d",&n);
-    printf("Enter the adjacency matrix:\n");
-    for(i=0; i<n; i++)
+    o=n;
+    printf("\n Enter the adjacency matrix:\n");
+	for(int i=0;i<n;i++)
     {
-        printf("Enter row %d\n",i+1);
-        for(j=0; j<n; j++)
-            scanf("%d",&a[i][j]);
+		//printf("\n Enter row %d : ",i+1);
+		for(int j=0;j<n;j++)
+			scanf("%d",&g[i][j]);
+        visited[i]=0;
+	}
+	printf("\n");
+	for(int i=0;i<n;i++)
+    {
+      DFS(i,0);
     }
-    for(i=0; i<n; i++)
+
+    printf("\n\n Topology Order: ");
+    for(int i=0;i<n;i++)
     {
-        indeg[i]=0;
-        flag[i]=0;
+        printf(" %d ",sortedOrder[i]);
     }
-    for(i=0; i<n; i++)
-        for(j=0; j<n; j++)
-            indeg[i]=indeg[i]+a[j][i];
-    printf("\nThe topological order is:");
-    while(count<n)
+    return 0;
+}
+
+void DFS(int k,int flag)
+{
+    if(flag==0 && visited[k]==0)
     {
-        for(k=0; k<n; k++)
+        printf("\n %d ",k);
+        sortedOrder[--o]=k;
+    }
+    else if(flag==0 && visited[k]!=0)
+    printf("");
+    else
+    {
+        printf(" %d ",k);
+        deadend[++d]=k;
+    }
+    visited[k]=1;
+    for(int j=0;j<n;j++)
+        if(visited[j]==0 && g[k][j]==1)
         {
-            if((indeg[k]==0) && (flag[k]==0))
-            {
-                printf("%d ",(k+1));
-                flag [k]=1;
-            }
-            for(i=0; i<n; i++)
-            {
-                if(a[i][k]==1)
-                    indeg[k]--;
-            }
+             DFS(j,1);
         }
-        count++;
+    if(d>=0){
+    int temp=sortedOrder[o++];
+    for(int k=d;k>=0;k--,--d)
+    {
+        sortedOrder[--o]=deadend[k];
     }
+    sortedOrder[--o]=temp;
     }
+}
